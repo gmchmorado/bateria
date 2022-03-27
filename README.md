@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# Batería Electrónica
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Requerimientos
 
-## Available Scripts
+Crear un "pad" de nueve elementos, que reproducirán un sonido asociado al interactuar con el mismo.
 
-In the project directory, you can run:
+Cada elemento tendrá como referencia una letra del teclado (Q, W, E, A, S, D, Z, X, C).
 
-### `npm start`
+La iteracción podrá ser mediante clic o presionar la tecla asociada correspondiente.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Cada "pad" (o tecla) tendrá un archivo de sonido asociado.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+El nombre del archivo identificará al sonido, estará asociado al "pad" y se mostrará el nombre del sonido cuando se interactue con el mismo.
 
-### `npm test`
+## Elementos a evaluar (historias de usuario)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Debe contener un elemento con id **drum-machine**.
+- Dentro del elemento **drum-machine** deberá existir un elemento con id **display**.
+- Dentro del elemento **drum-machine** deberán existir 9 elementos con la clase **drum-pad**.
+  - Cada elemento deberá tener un identificador único (id).
+  - Este identificador deberá describir al clip de audio.
+  - Tendrá un texto que corresponda a la tecla que lo identifica.
+- Cada elemento **drum-pad** contendrá un elemento (hijo) HTML5 `<audio></audio>`.
+  - Este elemento tendrá una propiedad *src* referenciada al archivo de audio.
+  - Deberá tener un id que corresponda al texto del elemento padre (letra asignada).
+- Al interactuar con los elementos **drum-pad** se debe activar el sonido del elemento hijo.
+  - Una iteracción será mediante dar clic en cada elemento.
+  - Otra interacción será mediante la opresión de la tecla con la letra asociada.
+  - Se deberá mostrar el texto del clip de sonido asociado.
 
-### `npm run build`
+## Lógica de diseño
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+La unidad básica será un componenete que correspondera a la clase **drum-pad**.
+- En este componenete se tendrán los métodos para reconocer las acciones de recibir clic o precionar una tecla.
+- A partir de la acción recibida deberá:
+  - Reproducir el clip de audio.
+  - Mostrar en el elemento con id **display**, el texto correspondiente al clip de audio.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Fuente de archivos de sonido
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Los clip de audio serán obtenidos de la suguiente URL:
 
-### `npm run eject`
+> https://s3.amazonaws.com/freecodecamp/drums/
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Los nombres de los clips son los siguientes
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Heater_1.mp3
+- Heater_2.mp3
+- Heater_3.mp3
+- Heater_4_1.mp3
+- Heater_6.mp3
+- Dsc_Oh.mp3
+- Kick_n_Hat.mp3
+- RP4_KICK_1.mp3
+- Cev_H2.mp3
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Para el manejo de los archivos de sonido utilizaré una variable para almacenar la ruta principal.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Para hacer la referencia se concatenará la variable con el nombre del archivo y la extensión (.mp3).
